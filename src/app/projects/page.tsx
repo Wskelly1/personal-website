@@ -1,7 +1,7 @@
 import ProjectCard from '../components/ProjectCard';
 
 async function getProjects() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/projects`, {
+  const res = await fetch(`/api/projects`, {
     cache: 'no-store'
   });
   
