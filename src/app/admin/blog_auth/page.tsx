@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { getApiUrl } from '@/lib/apiUrl';
 
 interface BlogPost {
   _id: string;
@@ -40,7 +41,7 @@ export default function BlogManagement() {
   // Fetch blog posts
   const fetchPosts = async () => {
     try {
-      const response = await fetch('/api/blog');
+      const response = await fetch(getApiUrl('/api/blog'));
       const data = await response.json();
       setPosts(data);
     } catch (error) {
@@ -59,7 +60,7 @@ export default function BlogManagement() {
     setSuccess('');
 
     try {
-      const url = currentPost._id ? `/api/blog/${currentPost._id}` : '/api/blog';
+      const url = currentPost._id ? getApiUrl(`/api/blog/${currentPost._id}`) : getApiUrl('/api/blog');
       const method = currentPost._id ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -99,7 +100,7 @@ export default function BlogManagement() {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
 
     try {
-      const response = await fetch(`/api/blog/${postId}`, {
+      const response = await fetch(getApiUrl(`/api/blog/${postId}`), {
         method: 'DELETE',
       });
 

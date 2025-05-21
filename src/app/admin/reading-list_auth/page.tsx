@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import BookImageUpload from '@/app/components/BookImageUpload';
+import { getApiUrl } from '@/lib/apiUrl';
 
 interface ReadingListItem {
   _id: string;
@@ -47,7 +48,7 @@ export default function AdminReadingList() {
   const fetchItems = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/reading-list');
+      const res = await fetch(getApiUrl('/api/reading-list'));
       if (!res.ok) {
         throw new Error('Failed to fetch reading list');
       }
@@ -76,7 +77,7 @@ export default function AdminReadingList() {
     setSuccess('');
     
     try {
-      const res = await fetch('/api/reading-list', {
+      const res = await fetch(getApiUrl('/api/reading-list'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newItem),
@@ -113,7 +114,7 @@ export default function AdminReadingList() {
       const item = items.find(item => item._id === id);
       if (!item) return;
 
-      const res = await fetch(`/api/reading-list/${id}`, {
+      const res = await fetch(getApiUrl(`/api/reading-list/${id}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -143,7 +144,7 @@ export default function AdminReadingList() {
       const item = items.find(item => item._id === id);
       if (!item) return;
 
-      const res = await fetch(`/api/reading-list/${id}`, {
+      const res = await fetch(getApiUrl(`/api/reading-list/${id}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -171,7 +172,7 @@ export default function AdminReadingList() {
 
     try {
       setError('');
-      const res = await fetch(`/api/reading-list/${id}`, {
+      const res = await fetch(getApiUrl(`/api/reading-list/${id}`), {
         method: 'DELETE',
       });
 
@@ -194,7 +195,7 @@ export default function AdminReadingList() {
     setError('');
     setSuccess('');
     try {
-      const res = await fetch(`/api/reading-list/${editId}`, {
+      const res = await fetch(getApiUrl(`/api/reading-list/${editId}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(editItem),

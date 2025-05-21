@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { getApiUrl } from '@/lib/apiUrl';
 
 interface Project {
   _id: string;
@@ -53,7 +54,7 @@ export default function AdminProjects() {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('/api/projects');
+      const response = await fetch(getApiUrl('/api/projects'));
       if (response.ok) {
         const data = await response.json();
         setProjects(data);
@@ -85,8 +86,8 @@ export default function AdminProjects() {
 
     try {
       const url = editingProject 
-        ? '/api/projects'
-        : '/api/projects';
+        ? getApiUrl('/api/projects')
+        : getApiUrl('/api/projects');
       
       const method = editingProject ? 'PUT' : 'POST';
       let body = editingProject 
@@ -160,7 +161,7 @@ export default function AdminProjects() {
     }
 
     try {
-      const response = await fetch(`/api/projects?id=${projectId}`, {
+      const response = await fetch(getApiUrl(`/api/projects?id=${projectId}`), {
         method: 'DELETE',
       });
 
@@ -217,7 +218,7 @@ export default function AdminProjects() {
     formData.append('pdf', file);
 
     try {
-      const response = await fetch('/api/projects/upload', {
+      const response = await fetch(getApiUrl('/api/projects/upload'), {
         method: 'POST',
         body: formData,
       });

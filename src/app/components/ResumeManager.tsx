@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getApiUrl } from '@/lib/apiUrl';
 
 export default function ResumeManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function ResumeManager() {
     formData.append("resume", file);
 
     try {
-      const response = await fetch("/api/resume", {
+      const response = await fetch(getApiUrl("/api/resume"), {
         method: "POST",
         body: formData,
       });
@@ -52,7 +53,7 @@ export default function ResumeManager() {
     setSuccess("");
 
     try {
-      const response = await fetch("/api/resume", {
+      const response = await fetch(getApiUrl("/api/resume"), {
         method: "DELETE",
       });
 

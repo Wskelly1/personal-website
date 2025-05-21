@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import bcrypt from 'bcryptjs';
 import ResumeManager from '@/app/components/ResumeManager';
 import ProfileImageUpload from '@/app/components/ProfileImageUpload';
+import { getApiUrl } from '@/lib/apiUrl';
 
 export default function AccountPage() {
   const { data: session } = useSession({
@@ -62,7 +63,7 @@ export default function AccountPage() {
     }
 
     try {
-      const response = await fetch('/api/auth/change-password', {
+      const response = await fetch(getApiUrl('/api/auth/change-password'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +98,7 @@ export default function AccountPage() {
     setIsEmailLoading(true);
 
     try {
-      const response = await fetch('/api/auth/change-email', {
+      const response = await fetch(getApiUrl('/api/auth/change-email'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

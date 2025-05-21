@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import { getApiUrl } from '@/lib/apiUrl';
 
 export default function ProfileImageUpload() {
   const [isUploading, setIsUploading] = useState(false);
@@ -23,7 +24,7 @@ export default function ProfileImageUpload() {
     formData.append('image', file);
 
     try {
-      const res = await fetch('/api/profile/upload', {
+      const res = await fetch(getApiUrl('/api/profile/upload'), {
         method: 'POST',
         body: formData,
       });

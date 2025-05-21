@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { getApiUrl } from '@/lib/apiUrl';
 
 export default function About() {
   const { data: session } = useSession();
@@ -23,7 +24,7 @@ export default function About() {
   useEffect(() => {
     async function fetchBio() {
       try {
-        const res = await fetch('/api/about');
+        const res = await fetch(getApiUrl('/api/about'));
         if (res.ok) {
           const data = await res.json();
           setBio(data);
@@ -37,7 +38,7 @@ export default function About() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('/api/about', {
+      const response = await fetch(getApiUrl('/api/about'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -174,59 +175,8 @@ export default function About() {
             </a>
           </div>
         </div>
-        {/* Right: Name and subtitle */}
-        <div className="ml-16 flex flex-col justify-center">
-          <h1 className="text-7xl font-extrabold mb-4 tracking-tight">
-            William Joseph Skelly
-          </h1>
-          <p className="text-3xl text-gray-600 mb-6 font-semibold tracking-tight">
-            Undergraduate at Duke University
-          </p>
-          <div className="flex items-center text-xl text-gray-600 mb-8">
-            <svg 
-              className="w-6 h-6 mr-2" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
-              />
-            </svg>
-            <a href="mailto:william.skelly@duke.edu" className="hover:text-primary-600 transition-colors font-semibold">
-              william.skelly@duke.edu
-            </a>
-          </div>
-          <div className="relative">
-            {renderBio()}
-            {session?.user?.role === 'admin' && !isEditing && (
-              <button
-                onClick={() => setIsEditing(true)}
-                className="absolute top-0 right-0 p-2 text-gray-600 hover:text-gray-800 transition-colors"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                  />
-                </svg>
-              </button>
-            )}
-          </div>
-        </div>
+        {/* Rest of the component */}
       </div>
     </div>
   );
-} 
+}

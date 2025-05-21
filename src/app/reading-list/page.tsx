@@ -5,6 +5,7 @@ import CurrentReadCarousel from './CurrentReadCarousel';
 import TopReadsCarousel from './TopReadsCarousel';
 import BooksOnListCarousel from './BooksOnListCarousel';
 import AllBooks from './AllBooks';
+import { getApiUrl } from '@/lib/apiUrl';
 
 export default function ReadingListPage() {
   const [items, setItems] = useState([]);
@@ -13,7 +14,7 @@ export default function ReadingListPage() {
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
-      const res = await fetch('/api/reading-list');
+      const res = await fetch(getApiUrl('/api/reading-list'));
       const data = await res.json();
       setItems(data);
       setLoading(false);

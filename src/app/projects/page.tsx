@@ -1,7 +1,8 @@
 import ProjectCard from '../components/ProjectCard';
+import { getApiUrl } from '@/lib/apiUrl';
 
 async function getProjects() {
-  const res = await fetch(`/api/projects`, {
+  const res = await fetch(getApiUrl('/api/projects'), {
     cache: 'no-store'
   });
   

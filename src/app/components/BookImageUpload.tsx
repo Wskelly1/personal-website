@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getApiUrl } from '@/lib/apiUrl';
 
 interface BookImageUploadProps {
   onUpload: (filename: string) => void;
@@ -16,7 +17,7 @@ export default function BookImageUpload({ onUpload }: BookImageUploadProps) {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const res = await fetch('/api/reading-list/image-upload', {
+      const res = await fetch(getApiUrl('/api/reading-list/image-upload'), {
         method: 'POST',
         body: formData,
       });

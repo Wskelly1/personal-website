@@ -5,9 +5,10 @@ import ProfileCard from "./components/ProfileCard";
 import FeaturedProjectCard from "@/components/FeaturedProjectCard";
 import { IProject } from "@/models/Project";
 import { Types } from "mongoose";
+import { getApiUrl } from '@/lib/apiUrl';
 
 async function getFeaturedProjects() {
-  const res = await fetch(`/api/projects?featured=true`, {
+  const res = await fetch(getApiUrl('/api/projects?featured=true'), {
     cache: 'no-store'
   });
   if (!res.ok) throw new Error('Failed to fetch featured projects');
