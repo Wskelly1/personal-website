@@ -1,0 +1,6 @@
+---
+description: Align css or styling to be consistent across all pages 
+globs: 
+alwaysApply: false
+---
+When doing any CSS or styling, follow the color palette detailed in the global CSS file. 
