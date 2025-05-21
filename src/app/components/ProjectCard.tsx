@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaGithub, FaFilePdf, FaFileArchive, FaExternalLinkAlt } from 'react-icons/fa';
 import React from 'react';
 
 interface ProjectCardProps {
@@ -11,10 +11,12 @@ interface ProjectCardProps {
   description: string;
   link: string;
   pdfUrl?: string;
+  zipUrl?: string;
+  githubUrl?: string;
   status: 'completed' | 'in-progress' | 'upcoming';
 }
 
-const ProjectCard = ({ title, startDate, endDate, description, link, pdfUrl, status }: ProjectCardProps) => {
+const ProjectCard = ({ title, startDate, endDate, description, link, pdfUrl, zipUrl, githubUrl, status }: ProjectCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const previewRef = useRef<HTMLSpanElement>(null);
@@ -150,20 +152,28 @@ const ProjectCard = ({ title, startDate, endDate, description, link, pdfUrl, sta
               </p>
             </div>
             <div className="mt-auto space-y-1">
-              {link || pdfUrl ? (
-                <a
-                  href={link || pdfUrl}
-                  className="inline-block w-full text-center btn-primary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    window.open(link || pdfUrl, '_blank');
-                  }}
-                >
-                  View Project
-                </a>
-              ) : null}
-              {/* If you want to show a separate PDF button only if both are present, you can add it here */}
+              <div className="flex gap-4 justify-center items-center mt-2">
+                {githubUrl && (
+                  <a href={githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub Repository">
+                    <FaGithub className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+                  </a>
+                )}
+                {pdfUrl && (
+                  <a href={pdfUrl} target="_blank" rel="noopener noreferrer" title="View PDF">
+                    <FaFilePdf className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+                  </a>
+                )}
+                {zipUrl && (
+                  <a href={zipUrl} target="_blank" rel="noopener noreferrer" title="Download ZIP">
+                    <FaFileArchive className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+                  </a>
+                )}
+                {link && (
+                  <a href={link} target="_blank" rel="noopener noreferrer" title="External Link">
+                    <FaExternalLinkAlt className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

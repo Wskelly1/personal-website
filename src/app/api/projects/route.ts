@@ -77,10 +77,24 @@ export async function PUT(req: Request) {
       }
     }
     
+    // Split into $set and $unset
+    const setFields: Record<string, any> = {};
+    const unsetFields: Record<string, any> = {};
+    Object.entries(projectData).forEach(([key, value]) => {
+      if (value === '') {
+        unsetFields[key] = "";
+      } else {
+        setFields[key] = value;
+      }
+    });
+    const update: Record<string, any> = {};
+    if (Object.keys(setFields).length) update["$set"] = setFields;
+    if (Object.keys(unsetFields).length) update["$unset"] = unsetFields;
+    
     // Update project
     const project = await Project.findByIdAndUpdate(
       id,
-      projectData,
+      update,
       { new: true, runValidators: true }
     );
 

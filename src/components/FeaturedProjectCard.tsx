@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { IProject } from '@/models/Project';
+import { FaGithub, FaFilePdf, FaFileArchive, FaExternalLinkAlt } from 'react-icons/fa';
 
 interface FeaturedProjectCardProps {
   project: IProject;
@@ -22,18 +23,28 @@ export default function FeaturedProjectCard({ project }: FeaturedProjectCardProp
       <p className="mb-4 text-[#2E2F35] dark:text-neutral-200 text-center">
         {project.summaryDescription || project.description}
       </p>
-      {(project.link || project.pdfUrl) && (
-        <div className="absolute bottom-3 left-0 w-full flex justify-center">
-          <a
-            href={project.link || project.pdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-[#034ed2] text-white rounded-lg hover:bg-primary-700 transition-colors"
-          >
-            View Project
+      <div className="absolute bottom-3 left-0 w-full flex justify-center gap-4">
+        {project.githubUrl && (
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub Repository">
+            <FaGithub className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
           </a>
-        </div>
-      )}
+        )}
+        {project.pdfUrl && (
+          <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" title="View PDF">
+            <FaFilePdf className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+          </a>
+        )}
+        {project.zipUrl && (
+          <a href={project.zipUrl} target="_blank" rel="noopener noreferrer" title="Download ZIP">
+            <FaFileArchive className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+          </a>
+        )}
+        {project.link && (
+          <a href={project.link} target="_blank" rel="noopener noreferrer" title="External Link">
+            <FaExternalLinkAlt className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+          </a>
+        )}
+      </div>
     </div>
   );
 } 

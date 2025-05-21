@@ -10,6 +10,8 @@ export interface IProject extends Document {
   description: string;
   link?: string;
   pdfUrl?: string;
+  zipUrl?: string;
+  githubUrl?: string;
   status: 'completed' | 'in-progress' | 'upcoming';
   createdAt: Date;
   featured?: boolean;
@@ -51,6 +53,14 @@ const projectSchema = new mongoose.Schema({
     required: false,
   },
   pdfUrl: {
+    type: String,
+    required: false,
+  },
+  zipUrl: {
+    type: String,
+    required: false,
+  },
+  githubUrl: {
     type: String,
     required: false,
   },

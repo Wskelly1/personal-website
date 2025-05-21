@@ -15,6 +15,8 @@ interface Project {
   description: string;
   link: string;
   pdfUrl?: string;
+  zipUrl?: string;
+  githubUrl?: string;
   status: 'completed' | 'in-progress' | 'upcoming';
   featured: boolean;
 }
@@ -36,6 +38,8 @@ export default function AdminProjects() {
     description: '',
     link: '',
     pdfUrl: '',
+    zipUrl: '',
+    githubUrl: '',
     status: 'in-progress' as 'completed' | 'in-progress' | 'upcoming',
     featured: false,
   });
@@ -70,9 +74,9 @@ export default function AdminProjects() {
     setError('');
     setSuccess('');
 
-    // Require at least one of link or pdfUrl
-    if (!formData.link && !formData.pdfUrl) {
-      setError('Please provide either a Project Link or upload a Project PDF.');
+    // Require at least one of link, pdfUrl, zipUrl, or githubUrl
+    if (!formData.link && !formData.pdfUrl && !formData.zipUrl && !formData.githubUrl) {
+      setError('Please provide at least one of: Project Link, PDF, ZIP file URL, or GitHub repository URL.');
       setIsLoading(false);
       return;
     }
@@ -122,6 +126,8 @@ export default function AdminProjects() {
           description: '',
           link: '',
           pdfUrl: '',
+          zipUrl: '',
+          githubUrl: '',
           status: 'in-progress',
           featured: false,
         });
@@ -141,16 +147,18 @@ export default function AdminProjects() {
   const handleEdit = (project: Project) => {
     setEditingProject(project);
     setFormData({
-      title: project.title,
+      title: project.title || '',
       summaryTitle: project.summaryTitle || '',
       summaryDescription: project.summaryDescription || '',
       startDate: project.startDate ? new Date(project.startDate).toISOString().split('T')[0] : '',
       endDate: project.endDate ? new Date(project.endDate).toISOString().split('T')[0] : '',
-      description: project.description,
-      link: project.link,
+      description: project.description || '',
+      link: project.link || '',
       pdfUrl: project.pdfUrl || '',
-      status: project.status,
-      featured: project.featured,
+      zipUrl: project.zipUrl || '',
+      githubUrl: project.githubUrl || '',
+      status: project.status || 'in-progress',
+      featured: project.featured || false,
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -196,6 +204,8 @@ export default function AdminProjects() {
       description: '',
       link: '',
       pdfUrl: '',
+      zipUrl: '',
+      githubUrl: '',
       status: 'in-progress',
       featured: false,
     });
@@ -426,6 +436,36 @@ export default function AdminProjects() {
                     </a>
                   )}
                 </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="zipUrl" className="form-label">
+                  Project ZIP File URL
+                </label>
+                <input
+                  type="text"
+                  id="zipUrl"
+                  name="zipUrl"
+                  value={formData.zipUrl || ''}
+                  onChange={handleChange}
+                  className="input-field"
+                  placeholder="Enter ZIP file URL (optional)"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="githubUrl" className="form-label">
+                  GitHub Repository URL
+                </label>
+                <input
+                  type="text"
+                  id="githubUrl"
+                  name="githubUrl"
+                  value={formData.githubUrl || ''}
+                  onChange={handleChange}
+                  className="input-field"
+                  placeholder="Enter GitHub repository URL (optional)"
+                />
               </div>
 
               <div className="form-group flex items-center gap-2">

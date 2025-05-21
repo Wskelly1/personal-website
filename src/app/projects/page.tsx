@@ -44,6 +44,8 @@ export default async function Projects() {
               link={project.link}
               status={project.status}
               pdfUrl={project.pdfUrl}
+              zipUrl={project.zipUrl}
+              githubUrl={project.githubUrl}
             />
           </div>
         ))}
