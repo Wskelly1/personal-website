@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { getApiUrl } from '@/lib/apiUrl';
 
 export default function About() {
@@ -175,7 +175,36 @@ export default function About() {
             </a>
           </div>
         </div>
-        {/* Rest of the component */}
+        {/* Right: Bio content */}
+        <div className="flex-1 ml-12">
+          <div className="space-y-6">
+            <div className="bg-blue-50 p-8 rounded-lg shadow-sm h-[32rem]">
+              <div className="space-y-6">
+                <div className="relative h-full">
+                  <h1 className="text-6xl font-bold text-gray-700 absolute top-0 left-0">William Joseph Skelly</h1>
+                  <h2 className="text-3xl text-gray-600 absolute top-16 left-0 py-2">Undergraduate at Duke University</h2>
+                  <div className="flex items-center space-x-2 text-gray-600 absolute top-32 left-0">
+                    <FaEnvelope className="text-2xl text-primary-600 hover:text-primary-700 transition-colors" />
+                    <a href="mailto:william.skelly@duke.edu" className="text-xl hover:text-primary-600 transition-colors">
+                      william.skelly@duke.edu
+                    </a>
+                  </div>
+                  <div className="absolute top-44 left-0 right-0">
+                    {renderBio()}
+                    {session?.user?.role === 'admin' && !isEditing && (
+                      <button
+                        onClick={() => setIsEditing(true)}
+                        className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors mt-4"
+                      >
+                        Edit Bio
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
