@@ -73,7 +73,7 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       `}
     >
       {/* Title Section - Flexible height */}
-      <div className="w-full flex-[0.8] flex items-center justify-center min-h-0 mb-0 border border-dashed border-blue-400">
+      <div className="w-full flex-[0.8] flex items-center justify-center min-h-0 mb-0">
         <FitText min={12} max={28} throttle={32} mode="multi">
           <div className="font-semibold text-[#2E2F35] dark:text-white text-center w-full h-full flex items-center justify-center transition-all duration-200">
             {project.summaryTitle || project.title}
@@ -82,7 +82,7 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       </div>
 
       {/* Description Section - Flexible height */}
-      <div className="w-full flex-[1.2] flex items-center justify-center min-h-0 mt-0 border border-dashed border-blue-400">
+      <div className="w-full flex-[1.2] flex items-center justify-center min-h-0 mt-0">
         <FitText min={10} max={20} throttle={32} mode="multi">
           <div className="text-[#2E2F35] dark:text-neutral-200 text-center w-full h-full flex items-center justify-center transition-all duration-200">
             {project.summaryDescription || project.description}
