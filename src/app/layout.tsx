@@ -22,6 +22,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "My Portfolio",
   description: "Welcome to my personal website",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({

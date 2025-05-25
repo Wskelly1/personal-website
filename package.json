@@ -23,6 +23,7 @@
     "nodemailer": "^6.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-fittext": "^1.0.0",
     "react-icons": "^5.5.0",
     "react-responsive": "^10.0.1",
     "resend": "^4.5.1"

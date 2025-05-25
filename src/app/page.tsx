@@ -93,8 +93,22 @@ export default function Home() {
     <main className="page-container pt-10 max-w-screen-2xl mx-auto px-4 text-xl">
       <section className="flex flex-row items-end justify-between gap-x-12 mt-0">
         {/* Featured Projects Section (left) */}
-        <div className="w-2/3 ml-12 min-w-[400px]">
-          <h2 className="text-3xl font-extrabold mb-6 text-center">Featured Projects</h2>
+        <div className="md:w-2/3 w-full md:ml-12 min-w-0 md:min-w-[400px]">
+          <div className="flex flex-row items-center justify-between mb-6 min-w-0 overflow-hidden">
+            <h2
+              className="font-extrabold text-left whitespace-nowrap"
+              style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}
+            >
+              Featured Projects
+            </h2>
+            <Link
+              href="/projects"
+              className="font-semibold text-primary-700 underline hover:text-blue-600 transition-colors duration-200 ml-4 whitespace-nowrap"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
+            >
+              View All Projects →
+            </Link>
+          </div>
           <div className="flex flex-col gap-y-4">
             <div className="grid grid-cols-3 gap-4">
               {featuredProjects.slice(0, 3).map((project, idx) => (
@@ -104,17 +118,8 @@ export default function Home() {
                 />
               ))}
             </div>
-            <div className="flex justify-start">
-              <Link
-                href="/projects"
-                className="flex items-center justify-center gap-2 text-xl font-semibold py-1 rounded-lg w-full bg-[#e9f1ff] dark:bg-[#5f6c89] text-[#2E2F35] shadow hover:bg-primary-100 transition-colors"
-              >
-                View All Projects →
-              </Link>
-            </div>
           </div>
-          <div className="w-full h-2 bg-[#034ed2] rounded-b-xl mt-2"></div>
-          <div className="w-full bg-[#e9f1ff] text-[#2E2F35] text-center rounded-xl py-3 px-3 mt-2 text-lg mx-auto">
+          <div className="w-full bg-[#e9f1ff] text-[#2E2F35] text-center rounded-xl py-3 px-3 mt-12 text-lg mx-auto">
             When I'm not coding or running, you can find me listening to philosophy podcasts, writing screenplays, or watching movies.
           </div>
           <div className="w-full flex flex-col items-center mt-4 mb-2">
@@ -137,7 +142,7 @@ export default function Home() {
         </div>
 
         {/* Profile Section (right) */}
-        <div className="w-1/3 flex flex-col items-center justify-end h-full min-w-[350px]">
+        <div className="md:w-1/3 w-full flex flex-col items-center justify-end h-full min-w-0 md:min-w-[350px]">
           <ProfileCard />
         </div>
       </section>

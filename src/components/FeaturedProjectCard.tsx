@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { IProject } from '@/models/Project';
 import { FaGithub, FaFilePdf, FaFileArchive, FaExternalLinkAlt } from 'react-icons/fa';
 import { useEffect, useRef, useState } from 'react';
+// @ts-expect-error: No types for react-fittext
+import FitText from 'react-fittext';
 
 interface FeaturedProjectCardProps {
   project: IProject;
@@ -51,7 +53,7 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       className={`
         relative 
         w-full 
-        aspect-square
+        h-[300px]
         flex 
         flex-col 
         justify-between 
@@ -64,30 +66,28 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
         hover:scale-105 
         transition-transform 
         duration-200 
-        pt-12
+        pt-4
         pb-3
         px-3
         -mx-[1px]
       `}
     >
-      {/* Title Section - Fixed height */}
-      <div className="w-full h-[32px] flex items-center justify-center">
-        <h3 
-          ref={titleRef}
-          className={`font-semibold text-[#2E2F35] dark:text-white ${titleSize} transition-all duration-200 text-center`}
-        >
-          {project.summaryTitle || project.title}
-        </h3>
+      {/* Title Section - Flexible height */}
+      <div className="w-full flex-[0.8] flex items-center justify-center min-h-0 mb-0 border border-dashed border-blue-400">
+        <FitText min={12} max={28} throttle={32} mode="multi">
+          <div className="font-semibold text-[#2E2F35] dark:text-white text-center w-full h-full flex items-center justify-center transition-all duration-200">
+            {project.summaryTitle || project.title}
+          </div>
+        </FitText>
       </div>
 
-      {/* Description Section - Fixed height */}
-      <div className="w-full h-[120px] flex items-center justify-center">
-        <p 
-          ref={descriptionRef}
-          className={`text-[#2E2F35] dark:text-neutral-200 ${descriptionSize} transition-all duration-200 text-center`}
-        >
-          {project.summaryDescription || project.description}
-        </p>
+      {/* Description Section - Flexible height */}
+      <div className="w-full flex-[1.2] flex items-center justify-center min-h-0 mt-0 border border-dashed border-blue-400">
+        <FitText min={10} max={20} throttle={32} mode="multi">
+          <div className="text-[#2E2F35] dark:text-neutral-200 text-center w-full h-full flex items-center justify-center transition-all duration-200">
+            {project.summaryDescription || project.description}
+          </div>
+        </FitText>
       </div>
 
       {/* Icons Section - Fixed height */}
