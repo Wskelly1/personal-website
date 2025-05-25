@@ -317,13 +317,13 @@ export default function AdminProjects() {
 
               <div className="form-group">
                 <label htmlFor="summaryDescription" className="form-label">
-                  Summary Description <span className="text-gray-400">(max 65 chars)</span>
+                  Summary Description <span className="text-gray-400">(max 100 chars)</span>
                 </label>
                 <input
                   type="text"
                   id="summaryDescription"
                   name="summaryDescription"
-                  maxLength={65}
+                  maxLength={100}
                   value={formData.summaryDescription}
                   onChange={handleChange}
                   className="input-field"

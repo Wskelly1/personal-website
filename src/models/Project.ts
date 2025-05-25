@@ -29,7 +29,7 @@ const projectSchema = new mongoose.Schema({
   },
   summaryDescription: {
     type: String,
-    maxlength: 65,
+    maxlength: 100,
     required: false,
   },
   featured: {
