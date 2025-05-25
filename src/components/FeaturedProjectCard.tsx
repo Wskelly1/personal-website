@@ -14,8 +14,8 @@ interface FeaturedProjectCardProps {
 export default function FeaturedProjectCard({ project, compact, mobileSquare }: FeaturedProjectCardProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const [titleSize, setTitleSize] = useState('text-sm');
-  const [descriptionSize, setDescriptionSize] = useState('text-xs');
+  const [titleSize, setTitleSize] = useState('text-lg');
+  const [descriptionSize, setDescriptionSize] = useState('text-base');
 
   useEffect(() => {
     const checkTextFit = () => {
@@ -26,11 +26,11 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       
       // Check title fit
       const titleIsOverflowing = title.scrollHeight > title.clientHeight;
-      setTitleSize(titleIsOverflowing ? 'text-xs' : 'text-sm');
+      setTitleSize(titleIsOverflowing ? 'text-base' : 'text-lg');
       
       // Check description fit
       const descriptionIsOverflowing = description.scrollHeight > description.clientHeight;
-      setDescriptionSize(descriptionIsOverflowing ? 'text-[10px]' : 'text-xs');
+      setDescriptionSize(descriptionIsOverflowing ? 'text-sm' : 'text-base');
     };
 
     checkTextFit();
@@ -50,9 +50,8 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
     <div 
       className={`
         relative 
-        w-[140px] 
-        h-[140px] 
-        mx-auto 
+        w-full 
+        aspect-square
         flex 
         flex-col 
         justify-between 
@@ -65,13 +64,14 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
         hover:scale-105 
         transition-transform 
         duration-200 
-        pt-5
-        pb-2
+        pt-12
+        pb-3
         px-3
+        -mx-[1px]
       `}
     >
       {/* Title Section - Fixed height */}
-      <div className="w-full h-[35px] flex items-center justify-center">
+      <div className="w-full h-[32px] flex items-center justify-center">
         <h3 
           ref={titleRef}
           className={`font-semibold text-[#2E2F35] dark:text-white ${titleSize} transition-all duration-200 text-center`}
@@ -81,7 +81,7 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       </div>
 
       {/* Description Section - Fixed height */}
-      <div className="w-full h-[70px] flex items-center justify-center">
+      <div className="w-full h-[120px] flex items-center justify-center">
         <p 
           ref={descriptionRef}
           className={`text-[#2E2F35] dark:text-neutral-200 ${descriptionSize} transition-all duration-200 text-center`}
@@ -91,25 +91,25 @@ export default function FeaturedProjectCard({ project, compact, mobileSquare }: 
       </div>
 
       {/* Icons Section - Fixed height */}
-      <div className="w-full h-[20px] flex justify-center items-center gap-2">
+      <div className="w-full h-[25px] flex justify-center items-center gap-2">
         {project.githubUrl && (
           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub Repository">
-            <FaGithub className="text-primary-600 hover:text-primary-700 transition-colors text-base" />
+            <FaGithub className="text-primary-600 hover:text-primary-700 transition-colors text-2xl" />
           </a>
         )}
         {project.pdfUrl && (
           <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" title="View PDF">
-            <FaFilePdf className="text-primary-600 hover:text-primary-700 transition-colors text-base" />
+            <FaFilePdf className="text-primary-600 hover:text-primary-700 transition-colors text-2xl" />
           </a>
         )}
         {project.zipUrl && (
           <a href={project.zipUrl} target="_blank" rel="noopener noreferrer" title="Download ZIP">
-            <FaFileArchive className="text-primary-600 hover:text-primary-700 transition-colors text-base" />
+            <FaFileArchive className="text-primary-600 hover:text-primary-700 transition-colors text-2xl" />
           </a>
         )}
         {project.link && (
           <a href={project.link} target="_blank" rel="noopener noreferrer" title="External Link">
-            <FaExternalLinkAlt className="text-primary-600 hover:text-primary-700 transition-colors text-base" />
+            <FaExternalLinkAlt className="text-primary-600 hover:text-primary-700 transition-colors text-2xl" />
           </a>
         )}
       </div>
