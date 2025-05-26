@@ -15,7 +15,6 @@ export default async function Blog() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Blog</h1>
       <div className="space-y-8">
         {posts.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
@@ -23,7 +22,7 @@ export default async function Blog() {
           </div>
         ) : (
           posts.map((post) => (
-            <article key={post._id} className="bg-white rounded-lg shadow-md p-6">
+            <article key={post._id} className="bg-[#e9f1ff] rounded-lg shadow-md p-6">
               <h2 className="text-2xl font-semibold mb-2">
                 <Link 
                   href={`/blog/${post.slug}`}
